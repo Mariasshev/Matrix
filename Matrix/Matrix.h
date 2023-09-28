@@ -149,46 +149,27 @@ public:
 		}
 		return min;
 	}
-
-
-	Matrix<T>& operator=(const Matrix& obj) {
-		if (this != &obj)
-		{
-			return *this;
-		}
-		if (rows > 0) {
-			for (int i = 0; i < rows; i++)
-			{
-				delete[] matrix[i];
-			}
-		}
-		if (cols > 0) {
-			delete[]matrix;
-		}
+	Matrix(const Matrix& obj)
+	{
 		rows = obj.rows;
 		cols = obj.cols;
-		matrix = new int* [rows];
+		matrix = new T * [rows];
 		for (int i = 0; i < rows; i++) {
-			matrix[i] = new int[cols];
+			matrix[i] = new T[cols];
 		}
 		for (int i = 0; i < this->rows; i++)
 		{
 			for (int j = 0; j < this->cols; j++)
 			{
-				matrix[i][j] = obj.matrix[i][j];
+				this->matrix[i][j] = obj.matrix[i][j];
 			}
 		}
-		return *this;
 	}
-
-	Matrix<T>operator+(const int num);		//matrix + num
+	Matrix<T>operator+(const int& num);		//matrix + num
 	Matrix<T>operator-(const int num);		//matrix - num
 	Matrix<T>operator*(const int num);		//matrix * num
 	Matrix<T>operator/(const int num);		//matrix / num
-
 	
-
-
 	Matrix<T>operator+(const Matrix<T>& obj);						//matrix + matrix
 	Matrix<T>operator-(const Matrix<T>& obj);						//matrix - matrix
 	Matrix<T>operator*(const Matrix<T>& obj);						//matrix * matrix
@@ -211,14 +192,14 @@ public:
 
 //matrix + num
 template<class T>
-inline Matrix<T> Matrix<T>::operator+(const int num)
+inline Matrix<T> Matrix<T>::operator+(const int& num)
 {
 	Matrix<T> rez(rows, cols);
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			rez[i][j] = matrix[i][j] + num;
+			rez.matrix[i][j] = (matrix[i][j] + num);
 		}
 	}
 	return rez;
@@ -234,7 +215,7 @@ inline Matrix<T> Matrix<T>::operator-(const int num)
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			rez[i][j] = matrix[i][j] - num;
+			rez.matrix[i][j] = matrix[i][j] - num;
 		}
 	}
 	return rez;
@@ -250,7 +231,7 @@ inline Matrix<T> Matrix<T>::operator*(const int num)
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			rez[i][j] = matrix[i][j] * num;
+			rez.matrix[i][j] = matrix[i][j] * num;
 		}
 	}
 	return rez;
@@ -266,7 +247,7 @@ inline Matrix<T> Matrix<T>::operator/(const int num)
 	{
 		for (int j = 0; j < cols; j++)
 		{
-			rez[i][j] = matrix[i][j] / num;
+			rez.matrix[i][j] = matrix[i][j] / num;
 		}
 	}
 	return rez;
@@ -282,7 +263,7 @@ inline Matrix<T> Matrix<T>::operator+(const Matrix<T>& obj)
 		{
 			for (int j = 0; j < this->cols; j++)
 			{
-				rez[i][j] = this->matrix[i][j] + obj.matrix[i][j];
+				rez.matrix[i][j] = this->matrix[i][j] + obj.matrix[i][j];
 			}
 		}
 	}
@@ -302,7 +283,7 @@ inline Matrix<T> Matrix<T>::operator-(const Matrix<T>& obj)
 		{
 			for (int j = 0; j < this->cols; j++)
 			{
-				rez[i][j] = this->matrix[i][j] - obj.matrix[i][j];
+				rez.matrix[i][j] = this->matrix[i][j] - obj.matrix[i][j];
 			}
 		}
 	}
@@ -323,7 +304,7 @@ inline Matrix<T> Matrix<T>::operator*(const Matrix<T>& obj)
 		{
 			for (int j = 0; j < this->cols; j++)
 			{
-				rez[i][j] = this->matrix[i][j] * obj.matrix[i][j];
+				rez.matrix[i][j] = this->matrix[i][j] * obj.matrix[i][j];
 			}
 		}
 	}
@@ -333,7 +314,7 @@ inline Matrix<T> Matrix<T>::operator*(const Matrix<T>& obj)
 		{
 			for (int j = 0; j < obj.cols; j++)
 			{
-				rez[i][j] = obj.matrix[i][j] * this->matrix[i][j];
+				rez.matrix[i][j] = obj.matrix[i][j] * this->matrix[i][j];
 			}
 		}
 	}
@@ -342,21 +323,3 @@ inline Matrix<T> Matrix<T>::operator*(const Matrix<T>& obj)
 	}
 	return rez;
 }
-
-//template<class T>
-//inline bool Matrix<T>::operator!=(const Matrix<T>& obj)
-//{
-//	for (int i = 0; i < obj.rows; i++)
-//	{
-//		for (int j = 0; j < obj.cols; j++)
-//		{
-//			if (this->matrix[i][j] != obj.matrix[i][j]) {
-//				break;
-//				return true;
-//			}
-//			
-//		}
-//	}
-//	return false;
-//}
-
