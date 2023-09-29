@@ -21,7 +21,7 @@ public:
 	A operator+(const int num)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
@@ -39,7 +39,7 @@ public:
 	A operator-(const int num)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
@@ -57,7 +57,7 @@ public:
 	A operator*(const int num)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
@@ -75,7 +75,7 @@ public:
 	A operator/(const int num)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
@@ -93,7 +93,7 @@ public:
 	A operator+(const A& obj)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
@@ -116,22 +116,18 @@ public:
 	A& operator-(const A& obj)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
-		if (this->rows == obj.rows && this->cols == obj.cols) {
-			for (int i = 0; i < this->rows; i++)
+		for (int i = 0; i < this->rows; i++)
+		{
+			for (int j = 0; j < this->cols; j++)
 			{
-				for (int j = 0; j < this->cols; j++)
-				{
-					rez.arr[i][j] = this->arr[i][j] - obj.arr[i][j];
-				}
+				rez.arr[i][j] = arr[i][j] - obj.arr[i][j];
 			}
 		}
-		else {
-			cout << "Matrices have different size!" << endl;
-		}
+
 		return rez;
 	}
 
@@ -139,7 +135,7 @@ public:
 	A& operator*(const A& obj)
 	{
 		A rez(rows, cols);
-		arr = new int* [rows];
+		rez.arr = new int* [rows];
 		for (int i = 0; i < rows; i++) {
 			arr[i] = new int[cols];
 		}
@@ -150,15 +146,6 @@ public:
 				for (int j = 0; j < this->cols; j++)
 				{
 					rez.arr[i][j] = this->arr[i][j] * obj.arr[i][j];
-				}
-			}
-		}
-		else if (this->rows < obj.rows && this->cols < obj.cols) {
-			for (int i = 0; i < obj.rows; i++)
-			{
-				for (int j = 0; j < obj.cols; j++)
-				{
-					rez.arr[i][j] = obj.arr[i][j] * this->arr[i][j];
 				}
 			}
 		}

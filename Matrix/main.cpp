@@ -10,16 +10,47 @@ using namespace std;
 
 int main() {
 	Matrix<A>b(2,3);
+	Matrix<A>c(2,3);
 	cout << endl;
+
 	b.randMatrix();
+	c.randMatrix();
+	cout << "Matrix c: ";
+	c.Print();
 	cout << "Matrix b: " << endl;
 	b.Print();
-	//cout << "Max: " << b.findMax() << endl;
-	//cout << "Min: " << b.findMin() << endl;
-	//b + 10;
+	cout << "Max: ";
+	//b.findMax();
+	cout << "Min: ";
+	//b.findMin();
+
+	//check: matrix + num
+	b + 10;
 	b.Print();
-	//b + c;
-	//b.Print();
+
+	//check: matrix - num
+	b - 5;
+	b.Print();
+
+	//check: matrix * num
+	b * 5;
+	b.Print();
+
+	//check: matrix / num
+	b / 3;
+	b.Print();
+
+	//check: matrix + matrix
+	b + c;
+	b.Print();
+
+	//check: matrix - matrix
+	b - c;
+	b.Print();
+
+	//check: matrix * matrix
+	b * c;
+	b.Print();
 
 	//cout << b(2, 1);
 

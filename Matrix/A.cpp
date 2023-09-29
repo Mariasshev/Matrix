@@ -63,20 +63,21 @@ A& A::operator=(const A& obj)
 		return *this;
 	}
 	Delete();
-	rows = obj.rows;
-	cols = obj.cols;
-	arr = new int* [rows];
+	A rez;
+	rez.rows = obj.rows;
+	rez.cols = obj.cols;
+	rez.arr = new int* [rows];
 	for (int i = 0; i < rows; i++) {
-		arr[i] = new int[cols];
+		rez.arr[i] = new int[cols];
 	}
 	for (int i = 0; i < this->rows; i++)
 	{
 		for (int j = 0; j < this->cols; j++)
 		{
-			arr[i][j] = obj.arr[i][j];
+			rez.arr[i][j] = obj.arr[i][j];
 		}
 	}
-	return *this;
+	return rez;
 }
 
 void A::Delete()
